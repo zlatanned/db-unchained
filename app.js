@@ -2,6 +2,7 @@
 const readline = require('readline');
 const { generateDBQuery } = require('./core/queryGenerator');
 const { isValidPrompt, isASupportedLanguage } = require('./util');
+const { enableAutoDetectLang } = require('./config/defaults');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -14,10 +15,14 @@ function ask(question) {
 
 async function main() {
     try {
-        const queryLanguage = await ask('Enter the Query Language (e.g: SQL, MongoDB): ');
-        if(!isASupportedLanguage(queryLanguage)) {
-            console.warn('❌ Please enter a valid & supported Query Language.');
-            process.exit(1);
+        let queryLanguage = null;
+        console.info(enableAutoDetectLang === 'true' ? '🔍 Auto Language Detection Mode Enabled' : '🎯 Manual Language Selection Mode Enabled');
+        if (!enableAutoDetectLang) {
+            queryLanguage = await ask('Enter the Query Language (e.g: SQL, MongoDB): ');
+            if (!isASupportedLanguage(queryLanguage)) {
+                console.warn('❌ Please enter a valid & supported Query Language.');
+                process.exit(1);
+            }
         }
 
         const userPrompt = await ask('Enter your natural language prompt:\n ');
