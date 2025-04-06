@@ -1,10 +1,9 @@
 # DB-Unchained 🧠🔗
 
-Turn plain English into database queries. Powered by LangChain + Groq LLM.
+Turn plain English into database queries With Auto Language Detection(enabled by default). Powered by LangChain + Groq LLM.
 
-> Example:  
-> Prompt #1: SQL
-> Prompt #2: `Fetch all names and emails of users aged 25 or below from users table`
+> Example:
+> Prompt: `Fetch all names and emails of users aged 25 or below from users table`
 > Output:  
 > ```sql  
 > SELECT name, email FROM users WHERE age <= 25;
@@ -21,8 +20,9 @@ Tired of writing raw SQL or remembering Mongo filters? Just describe what you wa
 ## 🛠️ Features
 
 - ✅ Converts English prompts to queries using LLM
-- 🌐 Support for multiple query languages (SQL, MongoDB etc.)
-- 🔁 Pluggable LLMs (OpenAI, Groq, Ollama etc.)
+- 🔍 Auto Language Detection Mode (Supports all existing Query Languages)
+- 🌐 Support for multiple query languages in Manual Language Selection Mode (SQL or MongoDB)
+- 🔁 Pluggable LLMs (OpenAI, Groq etc.)
 - 🔧 Configurable via environment variables
 - 📦 Dockerized for easy deployment
 - ✨ Clean and modular structure, built for scaling
@@ -31,7 +31,7 @@ Tired of writing raw SQL or remembering Mongo filters? Just describe what you wa
 
 ## 🧪 Example Prompts to Try
 
-| Prompt                                                   | Output Example (if chosen SQL)                              |
+| Prompt                                                   | Output Example                                              |
 |----------------------------------------------------------|-------------------------------------------------------------|
 | List all customers who joined in the last 30 days        | `SELECT * FROM customers WHERE created_at >= NOW() - INTERVAL 30 DAY;` |
 | Fetch products that are out of stock                     | `SELECT * FROM products WHERE stock = 0;`                  |
@@ -47,6 +47,7 @@ All config is managed via environment variables. Example `.env`:
 
 ```env
 LLM_PROVIDER=groq
+ENABLE_AUTO_DETECT=true
 GROQ_API_KEY=your-groq-api-key-here
 GROQ_MODEL=model-you-want-to-use
 ```
@@ -71,8 +72,11 @@ npm install --omit=dev
 # Run
 npm start
 ```
-- You’ll be prompted to enter your preferred query language followed by a plain text in your natural language.
+- (if ENABLE_AUTO_DETECT = true) You’ll be prompted to enter your preferred query language followed by a plain text in your natural language.
 The app will return a raw DB query (acc to your selected query language in first prompt) using the selected LLM.
+
+- (if ENABLE_AUTO_DETECT = false) You’ll be prompted to enter a plain text in your natural language.
+The app will return a raw DB query with automatic language selection based on your prompt and general popularity.
 
 ---
 
