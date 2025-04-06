@@ -1,6 +1,5 @@
 module.exports = {
     llmProvider: process.env.LLM_PROVIDER || 'groq',   // Options: 'groq', 'openai' etc.
-    queryLanguage: process.env.QUERY_LANGUAGE || 'SQL',    //TODO - to be extended to GraphQL, MongoDB etc.
     groq: {
         apiKey: process.env.GROQ_API_KEY,
         model: process.env.GROQ_MODEL,
