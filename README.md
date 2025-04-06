@@ -1,6 +1,6 @@
 # DB-Unchained 🧠🔗
 
-Turn plain English into database queries With Auto Language Detection(enabled by default). Powered by LangChain + Groq LLM.
+Turn plain English into database queries using AI with Auto Language Detection.
 
 > Example:
 
