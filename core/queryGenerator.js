@@ -1,6 +1,5 @@
 // Combines the schema with the user's natural language prompt, then gets the generated query from the LLM.
 const { getLLMResponse } = require('./llmClient');
-const schema = require('./schema');
 const config = require('../config/defaults');
 const promptTemplates = require('../promptBuilder/index');
 
