@@ -3,7 +3,9 @@
 Turn plain English into database queries With Auto Language Detection(enabled by default). Powered by LangChain + Groq LLM.
 
 > Example:
+
 > Prompt: `Fetch all names and emails of users aged 25 or below from users table`
+
 > Output:  
 > ```sql  
 > SELECT name, email FROM users WHERE age <= 25;
