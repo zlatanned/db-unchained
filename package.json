@@ -1,0 +1,18 @@
+{
+	"name": "db-unchained",
+	"version": "0.1.0",
+	"description": "Convert simple English text into a configurable query using AI",
+	"main": "app.js",
+	"scripts": {
+		"start": "node --env-file=.env --no-warnings app.js"
+	},
+	"engines": {
+		"node": ">=22"
+	},
+	"dependencies": {
+		"langchain": "^0.3.20",
+		"@langchain/openai": "^0.5.4",
+		"@langchain/groq": "^0.2.1"
+	},
+	"license": "MIT"
+}
