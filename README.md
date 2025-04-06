@@ -3,10 +3,11 @@
 Turn plain English into database queries. Powered by LangChain + Groq LLM.
 
 > Example:  
-> Prompt: `Select all users aged 25 or above`  
+> Prompt #1: SQL
+> Prompt #2: `Fetch all names and emails of users aged 25 or below from users table`
 > Output:  
 > ```sql  
-> SELECT * FROM users WHERE age >= 25;  
+> SELECT name, email FROM users WHERE age <= 25;
 > ```
 
 ---
@@ -30,7 +31,7 @@ Tired of writing raw SQL or remembering Mongo filters? Just describe what you wa
 
 ## 🧪 Example Prompts to Try
 
-| Prompt                                                   | Output Example (with default query lang set to SQL)         |
+| Prompt                                                   | Output Example (if chosen SQL)                              |
 |----------------------------------------------------------|-------------------------------------------------------------|
 | List all customers who joined in the last 30 days        | `SELECT * FROM customers WHERE created_at >= NOW() - INTERVAL 30 DAY;` |
 | Fetch products that are out of stock                     | `SELECT * FROM products WHERE stock = 0;`                  |
@@ -48,21 +49,15 @@ All config is managed via environment variables. Example `.env`:
 LLM_PROVIDER=groq
 GROQ_API_KEY=your-groq-api-key-here
 GROQ_MODEL=model-you-want-to-use
-QUERY_LANGUAGE=SQL
 ```
-
 - ✅ Node.js v22+ supported natively with .env file alternatives
 - 🔐 Never commit your .env with secrets
-
 ---
 
 ## 🔐 How to Get Groq API Key
 - Visit: https://console.groq.com/keys
-
 - Login with GitHub/Google
-
 - Generate a new API key
-
 - Add to .env as GROQ_API_KEY=...
 
 ---
@@ -76,7 +71,8 @@ npm install --omit=dev
 # Run
 npm start
 ```
-- You’ll be prompted to enter natural language. The app will return a raw SQL query (or your selected query language) using the selected LLM.
+- You’ll be prompted to enter your preferred query language followed by a plain text in your natural language.
+The app will return a raw DB query (acc to your selected query language in first prompt) using the selected LLM.
 
 ---
 
